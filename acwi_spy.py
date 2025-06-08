@@ -146,10 +146,14 @@ if st.session_state.analysis_complete and st.session_state.analysis_data:
     
     with col4:
         difference = spy_analysis['current_value'] - acwi_analysis['current_value']
+        if acwi_analysis['current_value'] != 0:
+            delta_percent = (difference / acwi_analysis['current_value']) * 100
+        else:
+            delta_percent = 0
         st.metric(
             "SPY vs ACWI Difference",
             f"${difference:,.2f}",
-            delta=f"{(difference/acwi_analysis['current_value']*100):+.2f}%"
+            delta=f"{delta_percent:+.2f}%"
         )
     
     # XIRR Comparison
